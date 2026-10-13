@@ -1,0 +1,24 @@
+# Xcode & Swift
+build/
+DerivedData/
+*.moved-builder-tmp
+.build/
+*.xcscmblueprint
+*.xccheckout
+
+# User-specific Xcode data (prevents leaking your username & window state)
+*.xcuserstate
+project.xcworkspace/xcuserdata/
+*.xcuserdatad
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Backups & autosave
+*~
+*.swp
+*.orig

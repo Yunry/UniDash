@@ -1,0 +1,762 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0448C7B26420D1D0D7ACD3DC /* AcademicTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A407DFC36F1A2B2328ABE86A /* AcademicTimelineView.swift */; };
+		0BF3A75F247281F2C542CD5F /* TimetableImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307B8EA3D23DD4B6364E4770 /* TimetableImportView.swift */; };
+		0CCF1C32FEC44125C14DD373 /* UniDashApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423134FC0459094CDBC3E29D /* UniDashApp.swift */; };
+		0F8000647F0E1405585A1447 /* CampusRoomGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425FBD8A09FD5AE421A9E80 /* CampusRoomGuide.swift */; };
+		111306C9D3466BED6EC5A746 /* GradesDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768389FD9A0FE0B37EDA839D /* GradesDashboardView.swift */; };
+		11C3F559E53FB2C843A02DC8 /* AcademicTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0729DA362AEA3C34A54D714F /* AcademicTimeline.swift */; };
+		13DE1AE5A8B5241BD4CC84A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FD1FD3C73A6B1C7622E9968 /* Assets.xcassets */; };
+		16E4ECF0A6E8916F8BA1CB57 /* TimetableEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C24F2D686A5BD94F0CF0F /* TimetableEntry.swift */; };
+		1F14C860D5D266A7BC2043ED /* MensaMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF7D8553535559235FD07F5 /* MensaMenuView.swift */; };
+		2177C1AFED548AAB1E7C9F10 /* AdaptiveRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A38C59EDFD4C2B364E83821 /* AdaptiveRootView.swift */; };
+		273F5EE2BF8037335F206441 /* PDFKitRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E476E054B6576B8D4D9EE17 /* PDFKitRepresentedView.swift */; };
+		27C1B6D516FBE2BDD2442AE6 /* EmbeddedWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F66ECC947D3BEF40DFFCE /* EmbeddedWebView.swift */; };
+		287B0966ADF28B45915F07D5 /* LMU_Stundenplan_WS24.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E1513B305D1C27BAED0B47AA /* LMU_Stundenplan_WS24.pdf */; };
+		2A60E60543135C8D53F385BE /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8207EF25D911F67CC6D47 /* ScheduleItem.swift */; };
+		3850C7B57A424E4924F1D245 /* PDFScheduleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D141C8BBB7C9724BDD41A3 /* PDFScheduleParser.swift */; };
+		3898E0424B72823BC2D2A198 /* AddCourseModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977C1120ADD801FFDE182D17 /* AddCourseModal.swift */; };
+		38D28287149BAD79103E5B5B /* AcademicTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0729DA362AEA3C34A54D714F /* AcademicTimeline.swift */; };
+		3D9D367EC59E5904C9A1777A /* AdaptiveRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A38C59EDFD4C2B364E83821 /* AdaptiveRootView.swift */; };
+		41557E8AB7DA7E9A9BDD28C2 /* CampusLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECDE0919E1D0BA6138DE28C /* CampusLink.swift */; };
+		426757CF42D071AFB64DE113 /* RoomBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73F2E4F207EC63ADD6B4529 /* RoomBookingView.swift */; };
+		457F8C052EED52241DFD8189 /* TimetableEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C24F2D686A5BD94F0CF0F /* TimetableEntry.swift */; };
+		4639D1D3D38C9809F780AF56 /* CampusRoomDecoderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D836C48F377EE894A74451 /* CampusRoomDecoderView.swift */; };
+		482E1683255D23F79A4B8C2C /* CalendarSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF64D10E6ED21882755385C /* CalendarSyncService.swift */; };
+		51803239B188331247FC4C55 /* CalendarSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF64D10E6ED21882755385C /* CalendarSyncService.swift */; };
+		546DDFE151BB7A22C60006E1 /* CampusLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECDE0919E1D0BA6138DE28C /* CampusLink.swift */; };
+		559A5130ADF2420C363799ED /* AcademicTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0729DA362AEA3C34A54D714F /* AcademicTimeline.swift */; };
+		564C298DD1CD621FB0E97B78 /* PDFScheduleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D141C8BBB7C9724BDD41A3 /* PDFScheduleParser.swift */; };
+		5664A4D01885AD9E38AAEBB1 /* MensaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1639DE983E8BE16D3961A3 /* MensaService.swift */; };
+		600DFB9EEBC012E1C78431D4 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF6E5415778CA4878A7E0F /* Course.swift */; };
+		65DD74AE002B9A8A8C7DD949 /* LibraryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8166CDEFC938402CE57FD3F /* LibraryInfo.swift */; };
+		6D7173703D992ED04EFD1BE7 /* MensaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1639DE983E8BE16D3961A3 /* MensaService.swift */; };
+		7925FF53C729F95AAB775497 /* AppDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B20E684F81914E64FA983E4 /* AppDestination.swift */; };
+		79E1018906F5ED8833B05F9B /* RoomBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73F2E4F207EC63ADD6B4529 /* RoomBookingView.swift */; };
+		7D0516EE363C693732A7DF3F /* LibraryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8166CDEFC938402CE57FD3F /* LibraryInfo.swift */; };
+		7D097F551AD04E9FE17CBAC6 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF6E5415778CA4878A7E0F /* Course.swift */; };
+		805C8A06EE997C103ECB7092 /* MensaMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF7D8553535559235FD07F5 /* MensaMenuView.swift */; };
+		8162A12525DFC0E249836788 /* CampusQuickLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D308D9B96D4F9F63394C53 /* CampusQuickLinksView.swift */; };
+		86D2F2DE0BFF0265B1C45D74 /* PDFScheduleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D141C8BBB7C9724BDD41A3 /* PDFScheduleParser.swift */; };
+		8858E07E78374623D2AE2441 /* MensaMeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B4812DF3CA721B9CB82580 /* MensaMeal.swift */; };
+		8881E6657BF34BBD1B9F9128 /* CampusQuickLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D308D9B96D4F9F63394C53 /* CampusQuickLinksView.swift */; };
+		977F0C48FB1F018C838DF6A5 /* GradesDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768389FD9A0FE0B37EDA839D /* GradesDashboardView.swift */; };
+		98DC961210CF67C67ED63EBE /* CalendarPushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6E6050B708E9EFF3328838 /* CalendarPushView.swift */; };
+		9C2C014F22EF1B1A6AFF1BAA /* AddCourseModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977C1120ADD801FFDE182D17 /* AddCourseModal.swift */; };
+		9F3D423FB16890F9B2B63C6F /* AcademicTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A407DFC36F1A2B2328ABE86A /* AcademicTimelineView.swift */; };
+		A20667E1797EAFEBE9D902DD /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8207EF25D911F67CC6D47 /* ScheduleItem.swift */; };
+		A8F8448B09BF9E4FB43F6F61 /* TimetableImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307B8EA3D23DD4B6364E4770 /* TimetableImportView.swift */; };
+		AD6ABA688251A5A2D20CA795 /* CalendarSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF64D10E6ED21882755385C /* CalendarSyncService.swift */; };
+		B2B50F9620E47A0AF0C19B7D /* CampusRoomDecoderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D836C48F377EE894A74451 /* CampusRoomDecoderView.swift */; };
+		B48BD20F1D4B50119673AD49 /* AppDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B20E684F81914E64FA983E4 /* AppDestination.swift */; };
+		B5D23648ED6A7ECFC4065962 /* MensaMeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B4812DF3CA721B9CB82580 /* MensaMeal.swift */; };
+		B9E1AA0A05A12F549868398A /* EmbeddedWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F66ECC947D3BEF40DFFCE /* EmbeddedWebView.swift */; };
+		C0FB6F5FB6E676CB8E8405CD /* MensaMeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B4812DF3CA721B9CB82580 /* MensaMeal.swift */; };
+		C1ADC697D4E1A3381FECFD7D /* PDFKitRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E476E054B6576B8D4D9EE17 /* PDFKitRepresentedView.swift */; };
+		C38D7A9315EF5D8F0D61EB1A /* TimetableEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C24F2D686A5BD94F0CF0F /* TimetableEntry.swift */; };
+		C44CCFAAE40C2814B83C00F7 /* CampusRoomGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425FBD8A09FD5AE421A9E80 /* CampusRoomGuide.swift */; };
+		CD725CB25FCA0FDFA2437848 /* LibraryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37F24127CC5A62E6E885CED /* LibraryCard.swift */; };
+		CD9BBAE03E54005E1760AEAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FD1FD3C73A6B1C7622E9968 /* Assets.xcassets */; };
+		CDFC588B97A1820E4C03D84A /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEF6E5415778CA4878A7E0F /* Course.swift */; };
+		CFB98C6155AC87440106BF05 /* LibraryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8166CDEFC938402CE57FD3F /* LibraryInfo.swift */; };
+		D0CE60CC80CD3C0ABED2810D /* CampusLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECDE0919E1D0BA6138DE28C /* CampusLink.swift */; };
+		D2E31611BDDDA6C0D9CB7190 /* LMU_Stundenplan_WS24.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E1513B305D1C27BAED0B47AA /* LMU_Stundenplan_WS24.pdf */; };
+		D51150D1D1A7903DE50BEE1F /* CampusRoomGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425FBD8A09FD5AE421A9E80 /* CampusRoomGuide.swift */; };
+		D7C6E32F83D63FF72ABACC88 /* UniDashApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423134FC0459094CDBC3E29D /* UniDashApp.swift */; };
+		DA7A2929BF5BBA130782E035 /* CalendarPushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6E6050B708E9EFF3328838 /* CalendarPushView.swift */; };
+		E0CEDCA1C33319534A5D0A60 /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8207EF25D911F67CC6D47 /* ScheduleItem.swift */; };
+		E6E61AB474966D23706FDD0D /* TimetableCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFC8806E957F110B98EBA8 /* TimetableCalendarView.swift */; };
+		EDD2D7898A92691C5152FFCC /* TimetableCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFC8806E957F110B98EBA8 /* TimetableCalendarView.swift */; };
+		F2268781868F9BCA8328AC8F /* MensaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1639DE983E8BE16D3961A3 /* MensaService.swift */; };
+		F29A498067E41D5C3AFB0600 /* ParseReviewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9553F6AB05EDF8A8491C77 /* ParseReviewSheet.swift */; };
+		F38B1B55804BEFEB772A3EEB /* ParseReviewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9553F6AB05EDF8A8491C77 /* ParseReviewSheet.swift */; };
+		F8FBBCDD9AEFDD48CF15C77D /* UniDashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711CBBDCD836049F374CFD7B /* UniDashTests.swift */; };
+		FDBC52D4BA24CB4864FFEB62 /* LibraryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37F24127CC5A62E6E885CED /* LibraryCard.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0425FBD8A09FD5AE421A9E80 /* CampusRoomGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusRoomGuide.swift; sourceTree = "<group>"; };
+		042F66ECC947D3BEF40DFFCE /* EmbeddedWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedWebView.swift; sourceTree = "<group>"; };
+		0729DA362AEA3C34A54D714F /* AcademicTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicTimeline.swift; sourceTree = "<group>"; };
+		0ECDE0919E1D0BA6138DE28C /* CampusLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusLink.swift; sourceTree = "<group>"; };
+		12D308D9B96D4F9F63394C53 /* CampusQuickLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusQuickLinksView.swift; sourceTree = "<group>"; };
+		18CC9BDF5B182B07B8DA1197 /* UniDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B20E684F81914E64FA983E4 /* AppDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDestination.swift; sourceTree = "<group>"; };
+		307B8EA3D23DD4B6364E4770 /* TimetableImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableImportView.swift; sourceTree = "<group>"; };
+		33D836C48F377EE894A74451 /* CampusRoomDecoderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusRoomDecoderView.swift; sourceTree = "<group>"; };
+		3D6E6050B708E9EFF3328838 /* CalendarPushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPushView.swift; sourceTree = "<group>"; };
+		3DBFC8806E957F110B98EBA8 /* TimetableCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableCalendarView.swift; sourceTree = "<group>"; };
+		423134FC0459094CDBC3E29D /* UniDashApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDashApp.swift; sourceTree = "<group>"; };
+		4A38C59EDFD4C2B364E83821 /* AdaptiveRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRootView.swift; sourceTree = "<group>"; };
+		4CF64D10E6ED21882755385C /* CalendarSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSyncService.swift; sourceTree = "<group>"; };
+		4FD1FD3C73A6B1C7622E9968 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50D141C8BBB7C9724BDD41A3 /* PDFScheduleParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFScheduleParser.swift; sourceTree = "<group>"; };
+		5CF7D8553535559235FD07F5 /* MensaMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MensaMenuView.swift; sourceTree = "<group>"; };
+		5DEF6E5415778CA4878A7E0F /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		5E476E054B6576B8D4D9EE17 /* PDFKitRepresentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFKitRepresentedView.swift; sourceTree = "<group>"; };
+		5F1639DE983E8BE16D3961A3 /* MensaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MensaService.swift; sourceTree = "<group>"; };
+		65B4812DF3CA721B9CB82580 /* MensaMeal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MensaMeal.swift; sourceTree = "<group>"; };
+		6D9553F6AB05EDF8A8491C77 /* ParseReviewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseReviewSheet.swift; sourceTree = "<group>"; };
+		711CBBDCD836049F374CFD7B /* UniDashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDashTests.swift; sourceTree = "<group>"; };
+		768389FD9A0FE0B37EDA839D /* GradesDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesDashboardView.swift; sourceTree = "<group>"; };
+		811C24F2D686A5BD94F0CF0F /* TimetableEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableEntry.swift; sourceTree = "<group>"; };
+		977C1120ADD801FFDE182D17 /* AddCourseModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseModal.swift; sourceTree = "<group>"; };
+		A37F24127CC5A62E6E885CED /* LibraryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCard.swift; sourceTree = "<group>"; };
+		A407DFC36F1A2B2328ABE86A /* AcademicTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicTimelineView.swift; sourceTree = "<group>"; };
+		A8166CDEFC938402CE57FD3F /* LibraryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryInfo.swift; sourceTree = "<group>"; };
+		A9E7A6EF770A4D0FB602F75E /* UniDash_macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = UniDash_macOS.app; path = UniDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B73F2E4F207EC63ADD6B4529 /* RoomBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomBookingView.swift; sourceTree = "<group>"; };
+		C3C8207EF25D911F67CC6D47 /* ScheduleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleItem.swift; sourceTree = "<group>"; };
+		C90A1518E8BF7730F3FEEA3D /* UniDashTests_macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniDashTests_macOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1513B305D1C27BAED0B47AA /* LMU_Stundenplan_WS24.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = LMU_Stundenplan_WS24.pdf; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		00279D5ECDA3A44D2434AD5C /* Grades */ = {
+			isa = PBXGroup;
+			children = (
+				977C1120ADD801FFDE182D17 /* AddCourseModal.swift */,
+				768389FD9A0FE0B37EDA839D /* GradesDashboardView.swift */,
+			);
+			path = Grades;
+			sourceTree = "<group>";
+		};
+		2F8E2BF7A2C73FB529C8D129 /* UniDashTests */ = {
+			isa = PBXGroup;
+			children = (
+				711CBBDCD836049F374CFD7B /* UniDashTests.swift */,
+			);
+			name = UniDashTests;
+			path = Tests/UniDashTests;
+			sourceTree = "<group>";
+		};
+		464385CE504E69F3FE637F1C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				423134FC0459094CDBC3E29D /* UniDashApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		4FC69B2910F56D0725D23557 /* Rooms */ = {
+			isa = PBXGroup;
+			children = (
+				A407DFC36F1A2B2328ABE86A /* AcademicTimelineView.swift */,
+				12D308D9B96D4F9F63394C53 /* CampusQuickLinksView.swift */,
+				33D836C48F377EE894A74451 /* CampusRoomDecoderView.swift */,
+				042F66ECC947D3BEF40DFFCE /* EmbeddedWebView.swift */,
+				A37F24127CC5A62E6E885CED /* LibraryCard.swift */,
+				B73F2E4F207EC63ADD6B4529 /* RoomBookingView.swift */,
+			);
+			path = Rooms;
+			sourceTree = "<group>";
+		};
+		52B512A21B567D5AF3FEFD3E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0729DA362AEA3C34A54D714F /* AcademicTimeline.swift */,
+				0ECDE0919E1D0BA6138DE28C /* CampusLink.swift */,
+				0425FBD8A09FD5AE421A9E80 /* CampusRoomGuide.swift */,
+				5DEF6E5415778CA4878A7E0F /* Course.swift */,
+				A8166CDEFC938402CE57FD3F /* LibraryInfo.swift */,
+				65B4812DF3CA721B9CB82580 /* MensaMeal.swift */,
+				C3C8207EF25D911F67CC6D47 /* ScheduleItem.swift */,
+				811C24F2D686A5BD94F0CF0F /* TimetableEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5C639998382314826B79BA3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18CC9BDF5B182B07B8DA1197 /* UniDash.app */,
+				A9E7A6EF770A4D0FB602F75E /* UniDash_macOS.app */,
+				C90A1518E8BF7730F3FEEA3D /* UniDashTests_macOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		799926218497F2AE28F6713A /* Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				3D6E6050B708E9EFF3328838 /* CalendarPushView.swift */,
+				6D9553F6AB05EDF8A8491C77 /* ParseReviewSheet.swift */,
+				5E476E054B6576B8D4D9EE17 /* PDFKitRepresentedView.swift */,
+				3DBFC8806E957F110B98EBA8 /* TimetableCalendarView.swift */,
+				307B8EA3D23DD4B6364E4770 /* TimetableImportView.swift */,
+			);
+			path = Timetable;
+			sourceTree = "<group>";
+		};
+		7B8F14EAC5DFF60B235AF44E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00279D5ECDA3A44D2434AD5C /* Grades */,
+				C4A023A68A6302660D1FC25D /* Mensa */,
+				E3291AD324A65AB8FE7A714A /* Navigation */,
+				4FC69B2910F56D0725D23557 /* Rooms */,
+				799926218497F2AE28F6713A /* Timetable */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A63ABB1EA3617A378A974464 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4FD1FD3C73A6B1C7622E9968 /* Assets.xcassets */,
+				E1513B305D1C27BAED0B47AA /* LMU_Stundenplan_WS24.pdf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B5B61326155FFD339ADAB2D1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4CF64D10E6ED21882755385C /* CalendarSyncService.swift */,
+				5F1639DE983E8BE16D3961A3 /* MensaService.swift */,
+				50D141C8BBB7C9724BDD41A3 /* PDFScheduleParser.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C4A023A68A6302660D1FC25D /* Mensa */ = {
+			isa = PBXGroup;
+			children = (
+				5CF7D8553535559235FD07F5 /* MensaMenuView.swift */,
+			);
+			path = Mensa;
+			sourceTree = "<group>";
+		};
+		DDB3F0B8843E7FA60EA87A5E = {
+			isa = PBXGroup;
+			children = (
+				464385CE504E69F3FE637F1C /* App */,
+				52B512A21B567D5AF3FEFD3E /* Models */,
+				A63ABB1EA3617A378A974464 /* Resources */,
+				B5B61326155FFD339ADAB2D1 /* Services */,
+				2F8E2BF7A2C73FB529C8D129 /* UniDashTests */,
+				7B8F14EAC5DFF60B235AF44E /* Views */,
+				5C639998382314826B79BA3C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E3291AD324A65AB8FE7A714A /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				4A38C59EDFD4C2B364E83821 /* AdaptiveRootView.swift */,
+				1B20E684F81914E64FA983E4 /* AppDestination.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1102E826F3928783CBB9D722 /* UniDashTests_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F736001EDA6E0B3711A8BF62 /* Build configuration list for PBXNativeTarget "UniDashTests_macOS" */;
+			buildPhases = (
+				CC0C3D321D00AE06E9F729EC /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UniDashTests_macOS;
+			packageProductDependencies = (
+			);
+			productName = UniDashTests_macOS;
+			productReference = C90A1518E8BF7730F3FEEA3D /* UniDashTests_macOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B8457D83FB9A5598FBE4F519 /* UniDash_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAFD3B7501CF0902A2D7A117 /* Build configuration list for PBXNativeTarget "UniDash_macOS" */;
+			buildPhases = (
+				52568715CF1A81B0024C476A /* Sources */,
+				DDA8AF479A6210E7968C7D09 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UniDash_macOS;
+			packageProductDependencies = (
+			);
+			productName = UniDash_macOS;
+			productReference = A9E7A6EF770A4D0FB602F75E /* UniDash_macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C162B1042934D429778F08A7 /* UniDash_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4AD6BF07828DE6536EA0121 /* Build configuration list for PBXNativeTarget "UniDash_iOS" */;
+			buildPhases = (
+				F075F0F5691D8DD3C3C089ED /* Sources */,
+				2EFAA043F9EAF89A0808644E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UniDash_iOS;
+			packageProductDependencies = (
+			);
+			productName = UniDash_iOS;
+			productReference = 18CC9BDF5B182B07B8DA1197 /* UniDash.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		57E6A18B749C7C71E23B71A8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					1102E826F3928783CBB9D722 = {
+						DevelopmentTeam = LR8339HK5J;
+						ProvisioningStyle = Manual;
+					};
+					B8457D83FB9A5598FBE4F519 = {
+						DevelopmentTeam = LR8339HK5J;
+						ProvisioningStyle = Manual;
+					};
+					C162B1042934D429778F08A7 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0AB00F592F6063F4B4A9B19C /* Build configuration list for PBXProject "UniDash" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = DDB3F0B8843E7FA60EA87A5E;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 5C639998382314826B79BA3C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C162B1042934D429778F08A7 /* UniDash_iOS */,
+				B8457D83FB9A5598FBE4F519 /* UniDash_macOS */,
+				1102E826F3928783CBB9D722 /* UniDashTests_macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EFAA043F9EAF89A0808644E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13DE1AE5A8B5241BD4CC84A8 /* Assets.xcassets in Resources */,
+				D2E31611BDDDA6C0D9CB7190 /* LMU_Stundenplan_WS24.pdf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDA8AF479A6210E7968C7D09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD9BBAE03E54005E1760AEAF /* Assets.xcassets in Resources */,
+				287B0966ADF28B45915F07D5 /* LMU_Stundenplan_WS24.pdf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		52568715CF1A81B0024C476A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11C3F559E53FB2C843A02DC8 /* AcademicTimeline.swift in Sources */,
+				9F3D423FB16890F9B2B63C6F /* AcademicTimelineView.swift in Sources */,
+				2177C1AFED548AAB1E7C9F10 /* AdaptiveRootView.swift in Sources */,
+				3898E0424B72823BC2D2A198 /* AddCourseModal.swift in Sources */,
+				B48BD20F1D4B50119673AD49 /* AppDestination.swift in Sources */,
+				98DC961210CF67C67ED63EBE /* CalendarPushView.swift in Sources */,
+				AD6ABA688251A5A2D20CA795 /* CalendarSyncService.swift in Sources */,
+				41557E8AB7DA7E9A9BDD28C2 /* CampusLink.swift in Sources */,
+				8162A12525DFC0E249836788 /* CampusQuickLinksView.swift in Sources */,
+				4639D1D3D38C9809F780AF56 /* CampusRoomDecoderView.swift in Sources */,
+				0F8000647F0E1405585A1447 /* CampusRoomGuide.swift in Sources */,
+				CDFC588B97A1820E4C03D84A /* Course.swift in Sources */,
+				B9E1AA0A05A12F549868398A /* EmbeddedWebView.swift in Sources */,
+				111306C9D3466BED6EC5A746 /* GradesDashboardView.swift in Sources */,
+				CD725CB25FCA0FDFA2437848 /* LibraryCard.swift in Sources */,
+				7D0516EE363C693732A7DF3F /* LibraryInfo.swift in Sources */,
+				C0FB6F5FB6E676CB8E8405CD /* MensaMeal.swift in Sources */,
+				1F14C860D5D266A7BC2043ED /* MensaMenuView.swift in Sources */,
+				6D7173703D992ED04EFD1BE7 /* MensaService.swift in Sources */,
+				C1ADC697D4E1A3381FECFD7D /* PDFKitRepresentedView.swift in Sources */,
+				86D2F2DE0BFF0265B1C45D74 /* PDFScheduleParser.swift in Sources */,
+				F29A498067E41D5C3AFB0600 /* ParseReviewSheet.swift in Sources */,
+				79E1018906F5ED8833B05F9B /* RoomBookingView.swift in Sources */,
+				E0CEDCA1C33319534A5D0A60 /* ScheduleItem.swift in Sources */,
+				E6E61AB474966D23706FDD0D /* TimetableCalendarView.swift in Sources */,
+				C38D7A9315EF5D8F0D61EB1A /* TimetableEntry.swift in Sources */,
+				A8F8448B09BF9E4FB43F6F61 /* TimetableImportView.swift in Sources */,
+				0CCF1C32FEC44125C14DD373 /* UniDashApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC0C3D321D00AE06E9F729EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				559A5130ADF2420C363799ED /* AcademicTimeline.swift in Sources */,
+				482E1683255D23F79A4B8C2C /* CalendarSyncService.swift in Sources */,
+				546DDFE151BB7A22C60006E1 /* CampusLink.swift in Sources */,
+				C44CCFAAE40C2814B83C00F7 /* CampusRoomGuide.swift in Sources */,
+				7D097F551AD04E9FE17CBAC6 /* Course.swift in Sources */,
+				CFB98C6155AC87440106BF05 /* LibraryInfo.swift in Sources */,
+				B5D23648ED6A7ECFC4065962 /* MensaMeal.swift in Sources */,
+				F2268781868F9BCA8328AC8F /* MensaService.swift in Sources */,
+				3850C7B57A424E4924F1D245 /* PDFScheduleParser.swift in Sources */,
+				2A60E60543135C8D53F385BE /* ScheduleItem.swift in Sources */,
+				457F8C052EED52241DFD8189 /* TimetableEntry.swift in Sources */,
+				F8FBBCDD9AEFDD48CF15C77D /* UniDashTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F075F0F5691D8DD3C3C089ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38D28287149BAD79103E5B5B /* AcademicTimeline.swift in Sources */,
+				0448C7B26420D1D0D7ACD3DC /* AcademicTimelineView.swift in Sources */,
+				3D9D367EC59E5904C9A1777A /* AdaptiveRootView.swift in Sources */,
+				9C2C014F22EF1B1A6AFF1BAA /* AddCourseModal.swift in Sources */,
+				7925FF53C729F95AAB775497 /* AppDestination.swift in Sources */,
+				DA7A2929BF5BBA130782E035 /* CalendarPushView.swift in Sources */,
+				51803239B188331247FC4C55 /* CalendarSyncService.swift in Sources */,
+				D0CE60CC80CD3C0ABED2810D /* CampusLink.swift in Sources */,
+				8881E6657BF34BBD1B9F9128 /* CampusQuickLinksView.swift in Sources */,
+				B2B50F9620E47A0AF0C19B7D /* CampusRoomDecoderView.swift in Sources */,
+				D51150D1D1A7903DE50BEE1F /* CampusRoomGuide.swift in Sources */,
+				600DFB9EEBC012E1C78431D4 /* Course.swift in Sources */,
+				27C1B6D516FBE2BDD2442AE6 /* EmbeddedWebView.swift in Sources */,
+				977F0C48FB1F018C838DF6A5 /* GradesDashboardView.swift in Sources */,
+				FDBC52D4BA24CB4864FFEB62 /* LibraryCard.swift in Sources */,
+				65DD74AE002B9A8A8C7DD949 /* LibraryInfo.swift in Sources */,
+				8858E07E78374623D2AE2441 /* MensaMeal.swift in Sources */,
+				805C8A06EE997C103ECB7092 /* MensaMenuView.swift in Sources */,
+				5664A4D01885AD9E38AAEBB1 /* MensaService.swift in Sources */,
+				273F5EE2BF8037335F206441 /* PDFKitRepresentedView.swift in Sources */,
+				564C298DD1CD621FB0E97B78 /* PDFScheduleParser.swift in Sources */,
+				F38B1B55804BEFEB772A3EEB /* ParseReviewSheet.swift in Sources */,
+				426757CF42D071AFB64DE113 /* RoomBookingView.swift in Sources */,
+				A20667E1797EAFEBE9D902DD /* ScheduleItem.swift in Sources */,
+				EDD2D7898A92691C5152FFCC /* TimetableCalendarView.swift in Sources */,
+				16E4ECF0A6E8916F8BA1CB57 /* TimetableEntry.swift in Sources */,
+				0BF3A75F247281F2C542CD5F /* TimetableImportView.swift in Sources */,
+				D7C6E32F83D63FF72ABACC88 /* UniDashApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		51207BA5312F7327FB365B65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.personal.unidash.UniDashTests-macOS";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		75BD48950DA4ED5F3CC00A9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2G74VX3KP7;
+				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.yuntong.unidash;
+				PRODUCT_MODULE_NAME = UniDash;
+				PRODUCT_NAME = UniDash;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		81824350889E295980D1BCC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = LR8339HK5J;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C4E7EB4C8AD47F796049494F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = LR8339HK5J;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CC7A627E63467DF8757BE03A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/UniDash_macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.unidash.macos;
+				PRODUCT_MODULE_NAME = UniDash;
+				PRODUCT_NAME = UniDash;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E017ACE276C7C65C0DDF9AE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2G74VX3KP7;
+				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.yuntong.unidash;
+				PRODUCT_MODULE_NAME = UniDash;
+				PRODUCT_NAME = UniDash;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E3DC1F22C1B8E9866D43A042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/UniDash_macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.unidash.macos;
+				PRODUCT_MODULE_NAME = UniDash;
+				PRODUCT_NAME = UniDash;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F0B5016D44F9BD38A2E3397A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.personal.unidash.UniDashTests-macOS";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0AB00F592F6063F4B4A9B19C /* Build configuration list for PBXProject "UniDash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81824350889E295980D1BCC1 /* Debug */,
+				C4E7EB4C8AD47F796049494F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A4AD6BF07828DE6536EA0121 /* Build configuration list for PBXNativeTarget "UniDash_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75BD48950DA4ED5F3CC00A9C /* Debug */,
+				E017ACE276C7C65C0DDF9AE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CAFD3B7501CF0902A2D7A117 /* Build configuration list for PBXNativeTarget "UniDash_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3DC1F22C1B8E9866D43A042 /* Debug */,
+				CC7A627E63467DF8757BE03A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F736001EDA6E0B3711A8BF62 /* Build configuration list for PBXNativeTarget "UniDashTests_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51207BA5312F7327FB365B65 /* Debug */,
+				F0B5016D44F9BD38A2E3397A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 57E6A18B749C7C71E23B71A8 /* Project object */;
+}
