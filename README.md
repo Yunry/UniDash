@@ -1,7 +1,7 @@
 # 🎓 UniDash — The Native Apple Campus Cockpit
 
 > **Dein Campus. Dein Semester. Eine blitzschnelle, native App für alles.**  
-> Everything university students need — Timetable, Mensa, Live Library Occupancy, Room Finder & GPA Tracker — unified in a pure native **SwiftUI & SwiftData** experience for **iOS 17+** and **macOS 14+**.
+> Everything university students need: Timetable, Mensa, Live Library Occupancy, Room Finder & GPA Tracker. Unified in a pure native **SwiftUI & SwiftData** experience for **iOS 17+** and **macOS 14+**.
 
 [![Platforms](https://img.shields.io/badge/Platforms-iOS%2017%2B%20%7C%20macOS%2014%2B-blue?logo=apple&style=flat-square)](#)
 [![Swift](https://img.shields.io/badge/Swift-6.0-orange?logo=swift&style=flat-square)](#)
