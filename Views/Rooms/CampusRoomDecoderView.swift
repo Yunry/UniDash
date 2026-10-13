@@ -26,6 +26,7 @@ struct CampusRoomDecoderView: View {
     @State private var viewMode: RoomfinderViewMode = .internalMap
     @State private var roomQuery: String = ""
     @State private var selectedBuildingCode: String = "bw0000" // Default: Hauptgebäude GSP 1
+    @State private var selectedRoomKey: String? = nil
     @State private var isMapLoading: Bool = false
     @State private var showFullScreenMap: Bool = false
     @Environment(\.openURL) private var openURL
@@ -40,10 +41,13 @@ struct CampusRoomDecoderView: View {
         if selectedBuildingCode == "city" {
             return URL(string: "https://www.lmu.de/raumfinder/#/")!
         }
+        if let key = selectedRoomKey, !key.isEmpty {
+            return URL(string: "https://www.lmu.de/raumfinder/#/building/\(selectedBuildingCode)/map?room=\(key)")!
+        }
         return URL(string: "https://www.lmu.de/raumfinder/#/building/\(selectedBuildingCode)/map")!
     }
 
-    private var decodedResult: (building: String, floor: String, tip: String, raumfinderURL: String)? {
+    private var decodedResult: DecodedRoom? {
         CampusBuildingGuide.decode(roomCode: roomQuery)
     }
 
@@ -63,7 +67,7 @@ struct CampusRoomDecoderView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundStyle(.secondary)
-                    TextField("Raumnummer eingeben (z.B. B 201, A 014, Theresienstr. 39)...", text: $roomQuery)
+                    TextField("Raum suchen (z.B. S 002, B 201, N 120, Audimax, Theresienstr. 39)...", text: $roomQuery)
                         .textFieldStyle(.plain)
                         .autocorrectionDisabled()
 
@@ -81,71 +85,132 @@ struct CampusRoomDecoderView: View {
                 .background(Color.secondary.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
 
-                // Instant Decoded Room Info Pill
-                if let result = decodedResult {
-                    HStack(alignment: .top, spacing: 10) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(.green)
-                            .padding(.top, 2)
+                // Quick Suggestion Chips when search bar is empty
+                if roomQuery.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 6) {
+                            Text("Schnellsuche:")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
 
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(result.building)
-                                .font(.subheadline)
-                                .fontWeight(.bold)
-
-                            HStack(spacing: 8) {
-                                Label(result.floor, systemImage: "stairs")
-                                    .font(.caption)
-                                    .foregroundStyle(.blue)
-
-                                Text("•")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-
-                                Label(result.tip, systemImage: "tram.fill")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-
-                            // Quick Jump into Internal Raumfinder Map
-                            HStack(spacing: 8) {
-                                Button {
-                                    switchToBuildingFromDecoded()
-                                } label: {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "map.fill")
-                                        Text("Auf Raumkarte öffnen")
-                                    }
-                                    .font(.caption)
-                                    .fontWeight(.semibold)
+                            ForEach(["S 002", "B 201", "N 120", "Audimax", "B 052", "W 101", "Raum 023", "Raum 144"], id: \.self) { sample in
+                                Button(sample) {
+                                    roomQuery = sample
                                 }
-                                .buttonStyle(.borderedProminent)
-                                .controlSize(.small)
-
-                                if let current = currentBuilding, let url = URL(string: current.mapsURL) {
-                                    Button {
-                                        openURL(url)
-                                    } label: {
-                                        HStack(spacing: 4) {
-                                            Image(systemName: "location.fill")
-                                            Text("Apple Maps")
-                                        }
-                                        .font(.caption)
-                                    }
-                                    .buttonStyle(.bordered)
-                                    .controlSize(.small)
-                                }
+                                .font(.caption2)
+                                .padding(.horizontal, 9)
+                                .padding(.vertical, 4)
+                                .background(Color.secondary.opacity(0.12))
+                                .foregroundStyle(.primary)
+                                .clipShape(Capsule())
                             }
-                            .padding(.top, 4)
                         }
                     }
-                    .padding(10)
+                    .padding(.top, 2)
+                }
+
+                // Instant Decoded Room Info Card
+                if let result = decodedResult {
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack(alignment: .top, spacing: 10) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.blue.opacity(0.15))
+                                    .frame(width: 40, height: 40)
+                                Image(systemName: "building.2.fill")
+                                    .foregroundStyle(.blue)
+                                    .font(.title3)
+                            }
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(result.building)
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                                    .fixedSize(horizontal: false, vertical: true)
+
+                                Label(result.address, systemImage: "mappin.and.ellipse")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+
+                            Spacer()
+                        }
+
+                        Divider()
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "stairs")
+                                    .foregroundStyle(.blue)
+                                    .font(.caption)
+                                Text(result.floor)
+                                    .font(.caption)
+                                    .fontWeight(.medium)
+                            }
+
+                            HStack(spacing: 6) {
+                                Image(systemName: "tram.fill")
+                                    .foregroundStyle(.secondary)
+                                    .font(.caption)
+                                Text(result.tip)
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+
+                        // Quick Jump into Internal Raumfinder Map & Navigation (Equal width buttons)
+                        HStack(spacing: 8) {
+                            Button {
+                                switchToBuildingFromDecoded()
+                            } label: {
+                                Label("Auf Raumkarte", systemImage: "map.fill")
+                                    .font(.caption)
+                                    .fontWeight(.semibold)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.75)
+                                    .frame(maxWidth: .infinity, minHeight: 28)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.small)
+
+                            if let url = URL(string: result.mapsURL) {
+                                Button {
+                                    openURL(url)
+                                } label: {
+                                    Label("Apple Maps", systemImage: "location.fill")
+                                        .font(.caption)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.75)
+                                        .frame(maxWidth: .infinity, minHeight: 28)
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.small)
+                            }
+
+                            if let url = URL(string: result.raumfinderURL) {
+                                Button {
+                                    openURL(url)
+                                } label: {
+                                    Label("Raumfinder Web", systemImage: "safari")
+                                        .font(.caption)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.75)
+                                        .frame(maxWidth: .infinity, minHeight: 28)
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.small)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 4)
+                    }
+                    .padding(12)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color.blue.opacity(0.08))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.blue.opacity(0.2), lineWidth: 1)
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(Color.blue.opacity(0.25), lineWidth: 1)
                     )
                 }
             }
@@ -173,7 +238,12 @@ struct CampusRoomDecoderView: View {
 
     private var fullScreenMapContent: some View {
         NavigationStack {
-            EmbeddedWebView(url: activeMapURL, isLoading: $isMapLoading)
+            EmbeddedWebView(
+                url: activeMapURL,
+                isLoading: $isMapLoading,
+                targetRoomKey: selectedRoomKey,
+                targetRoomQuery: roomQuery
+            )
                 .navigationTitle(currentBuilding?.name ?? "LMU Raumfinder")
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
@@ -212,6 +282,7 @@ struct CampusRoomDecoderView: View {
                         // City Map Overview button
                         Button {
                             selectedBuildingCode = "city"
+                            selectedRoomKey = nil
                         } label: {
                             HStack(spacing: 4) {
                                 Image(systemName: "globe.europe.africa.fill")
@@ -231,6 +302,7 @@ struct CampusRoomDecoderView: View {
                             let isSelected = selectedBuildingCode == building.lmuRaumfinderCode
                             Button {
                                 selectedBuildingCode = building.lmuRaumfinderCode
+                                selectedRoomKey = nil
                             } label: {
                                 Text(building.name)
                                     .font(.caption)
@@ -294,7 +366,12 @@ struct CampusRoomDecoderView: View {
 
                 // Embedded WebKit Raumfinder
                 ZStack {
-                    EmbeddedWebView(url: activeMapURL, isLoading: $isMapLoading)
+                    EmbeddedWebView(
+                        url: activeMapURL,
+                        isLoading: $isMapLoading,
+                        targetRoomKey: selectedRoomKey,
+                        targetRoomQuery: roomQuery
+                    )
                         #if os(iOS)
                         .frame(height: 480)
                         #elseif os(macOS)
@@ -358,6 +435,7 @@ struct CampusRoomDecoderView: View {
                         HStack(spacing: 6) {
                             Button {
                                 selectedBuildingCode = building.lmuRaumfinderCode
+                                selectedRoomKey = nil
                                 viewMode = .internalMap
                             } label: {
                                 Label("Raumplan", systemImage: "map.fill")
@@ -406,17 +484,12 @@ struct CampusRoomDecoderView: View {
     }
 
     private func switchToBuildingFromDecoded() {
-        let clean = roomQuery.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        if clean.contains("THERESIEN") || clean.contains("TH39") || clean.contains("TH41") {
-            selectedBuildingCode = "bw1003"
-        } else if clean.contains("LEOPOLD") || clean.contains("LEO13") {
-            selectedBuildingCode = "bw0601"
-        } else if clean.contains("OETTINGEN") || clean.contains("OETT") {
-            selectedBuildingCode = "bw7070"
-        } else if clean.contains("JURIDICUM") || clean.contains("PROF") {
-            selectedBuildingCode = "bw0420"
+        if let decoded = decodedResult {
+            selectedBuildingCode = decoded.lmuRaumfinderCode
+            selectedRoomKey = decoded.lmuRoomKey
         } else {
             selectedBuildingCode = "bw0000" // Hauptgebäude GSP 1
+            selectedRoomKey = nil
         }
         viewMode = .internalMap
     }

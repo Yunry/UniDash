@@ -371,7 +371,9 @@ final class UniDashTests: XCTestCase {
         XCTAssertNotNil(res1)
         XCTAssertTrue(res1?.building.contains("Hauptgebäude") ?? false)
         XCTAssertTrue(res1?.floor.contains("2. Obergeschoss") ?? false)
+        XCTAssertEqual(res1?.lmuRoomKey, "001102201_")
         XCTAssertTrue(res1?.raumfinderURL.contains("bw0000") ?? false)
+        XCTAssertTrue(res1?.raumfinderURL.contains("room=001102201_") ?? false)
 
         let res2 = CampusBuildingGuide.decode(roomCode: "A 014")
         XCTAssertNotNil(res2)
@@ -383,5 +385,35 @@ final class UniDashTests: XCTestCase {
         XCTAssertNotNil(res3)
         XCTAssertTrue(res3?.building.contains("MINT") ?? false)
         XCTAssertTrue(res3?.raumfinderURL.contains("bw1003") ?? false)
+
+        // Schellingstraße 3 (S 002 and S002) with exact room key
+        let res4 = CampusBuildingGuide.decode(roomCode: "S 002")
+        XCTAssertNotNil(res4)
+        XCTAssertTrue(res4?.building.contains("Schellingstraße") ?? false)
+        XCTAssertTrue(res4?.address.contains("Schellingstraße 3") ?? false)
+        XCTAssertTrue(res4?.floor.contains("Erdgeschoss") ?? false)
+        XCTAssertEqual(res4?.lmuRaumfinderCode, "bw0200")
+        XCTAssertEqual(res4?.lmuRoomKey, "020300002_")
+        XCTAssertTrue(res4?.raumfinderURL.contains("bw0200") ?? false)
+        XCTAssertTrue(res4?.raumfinderURL.contains("room=020300002_") ?? false)
+
+        let res5 = CampusBuildingGuide.decode(roomCode: "S002")
+        XCTAssertNotNil(res5)
+        XCTAssertTrue(res5?.building.contains("Schellingstraße") ?? false)
+        XCTAssertEqual(res5?.lmuRoomKey, "020300002_")
+
+        // Audimax & N-Trakt in GSP 1
+        let res6 = CampusBuildingGuide.decode(roomCode: "Audimax")
+        XCTAssertNotNil(res6)
+        XCTAssertTrue(res6?.building.contains("Hauptgebäude") ?? false)
+        XCTAssertTrue(res6?.floor.contains("Audimax") ?? false)
+        XCTAssertEqual(res6?.lmuRoomKey, "000000100_")
+        XCTAssertTrue(res6?.raumfinderURL.contains("room=000000100_") ?? false)
+
+        let res7 = CampusBuildingGuide.decode(roomCode: "N 120")
+        XCTAssertNotNil(res7)
+        XCTAssertTrue(res7?.floor.contains("1. Obergeschoss") ?? false)
+        XCTAssertTrue(res7?.floor.contains("Nordtrakt") ?? false)
+        XCTAssertEqual(res7?.lmuRoomKey, "002001120_")
     }
 }
