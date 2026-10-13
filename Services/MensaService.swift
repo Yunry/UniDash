@@ -125,8 +125,8 @@ final class MensaService: ObservableObject {
             return cached.meals
         }
 
-        // Check disk cache for offline access
-        if !forceRefresh, let diskMeals = loadMealsFromDisk(for: cacheKey), !diskMeals.isEmpty {
+        // Check disk cache for offline access (only if fresh)
+        if !forceRefresh, let diskMeals = loadMealsFromDisk(for: cacheKey, maxAge: cacheTTL), !diskMeals.isEmpty {
             self.meals = diskMeals
             self.memoryCache[cacheKey] = (Date(), diskMeals)
             self.errorMessage = nil
@@ -176,19 +176,15 @@ final class MensaService: ObservableObject {
                 return []
             }
 
-            // Find exact day, or closest available day if target is weekend / holiday
-            let matchingDay = days.first(where: { $0.date == targetDate })
-                ?? days.first(where: { $0.date >= targetDate })
-                ?? days.first
-
-            guard let activeDay = matchingDay, !activeDay.dishes.isEmpty else {
+            // Find exact day requested
+            guard let activeDay = days.first(where: { $0.date == targetDate }), !activeDay.dishes.isEmpty else {
                 self.meals = []
-                self.errorMessage = "Keine Gerichte für diesen Tag verfügbar."
+                self.errorMessage = "Für dieses Datum liegt kein Speiseplan vor (Mensa geschlossen oder Wochenende)."
                 return []
             }
 
             var resultMeals: [MensaMeal] = []
-            for (idx, dish) in activeDay.dishes.enumerated() {
+            for dish in activeDay.dishes {
                 // Calculate student price
                 let studentPrice: Double = {
                     if let s = dish.prices?.students {
@@ -224,8 +220,9 @@ final class MensaService: ObservableObject {
                 // Clean and translate labels into readable German notes
                 let translatedNotes = (dish.labels ?? []).map { translateLabel($0) }
 
+                let stableId = MensaService.stableDishID(name: dish.name, canteenId: canteenId)
                 let meal = MensaMeal(
-                    id: canteenId * 10000 + idx,
+                    id: stableId,
                     name: dish.name,
                     category: dish.dish_type ?? "Tagesgericht",
                     prices: MealPrices(students: studentPrice, employees: employeePrice, others: otherPrice),
@@ -241,7 +238,7 @@ final class MensaService: ObservableObject {
             return resultMeals
 
         } catch {
-            if let diskMeals = loadMealsFromDisk(for: cacheKey), !diskMeals.isEmpty {
+            if let diskMeals = loadMealsFromDisk(for: cacheKey, maxAge: nil), !diskMeals.isEmpty {
                 self.meals = diskMeals
                 self.errorMessage = nil
                 return diskMeals
@@ -289,7 +286,7 @@ final class MensaService: ObservableObject {
             self.errorMessage = nil
             return decodedMeals
         } catch {
-            if let diskMeals = loadMealsFromDisk(for: cacheKey), !diskMeals.isEmpty {
+            if let diskMeals = loadMealsFromDisk(for: cacheKey, maxAge: nil), !diskMeals.isEmpty {
                 self.meals = diskMeals
                 self.errorMessage = nil
                 return diskMeals
@@ -297,6 +294,20 @@ final class MensaService: ObservableObject {
             self.errorMessage = "Konnte Speiseplan nicht laden: \(error.localizedDescription)"
             return []
         }
+    }
+
+    // MARK: - Stable Dish Identification
+
+    /// Generates a deterministic, cross-session identifier based on dish name and canteen.
+    /// This ensures user star ratings persist accurately to the specific dish, rather than array indices.
+    static func stableDishID(name: String, canteenId: Int) -> Int {
+        let combined = "\(canteenId):\(name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased())"
+        var hash: UInt64 = 14695981039346656037
+        for byte in combined.utf8 {
+            hash ^= UInt64(byte)
+            hash = hash &* 1099511628211
+        }
+        return Int(hash % 2_000_000_000)
     }
 
     private func translateLabel(_ raw: String) -> String {
@@ -324,6 +335,11 @@ final class MensaService: ObservableObject {
 
     // MARK: - Disk Caching for Offline Mode
 
+    private struct CachedMealsPayload: Codable {
+        let timestamp: Date
+        let meals: [MensaMeal]
+    }
+
     private func cacheFileURL(for key: String) -> URL? {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?
             .appendingPathComponent("mensa_\(key).json")
@@ -331,16 +347,20 @@ final class MensaService: ObservableObject {
 
     private func saveMealsToDisk(_ meals: [MensaMeal], for key: String) {
         guard let url = cacheFileURL(for: key) else { return }
-        try? JSONEncoder().encode(meals).write(to: url)
+        let payload = CachedMealsPayload(timestamp: Date(), meals: meals)
+        try? JSONEncoder().encode(payload).write(to: url)
     }
 
-    private func loadMealsFromDisk(for key: String) -> [MensaMeal]? {
+    private func loadMealsFromDisk(for key: String, maxAge: TimeInterval? = nil) -> [MensaMeal]? {
         guard let url = cacheFileURL(for: key),
               let data = try? Data(contentsOf: url),
-              let meals = try? JSONDecoder().decode([MensaMeal].self, from: data) else {
+              let payload = try? JSONDecoder().decode(CachedMealsPayload.self, from: data) else {
             return nil
         }
-        return meals
+        if let maxAge, Date().timeIntervalSince(payload.timestamp) > maxAge {
+            return nil
+        }
+        return payload.meals
     }
 
     /// Load demo fallback meals

@@ -311,25 +311,43 @@ final class UniDashTests: XCTestCase {
         XCTAssertEqual(c3.gradeDescription, "Bestanden (Pass)")
     }
 
-    // MARK: - Campus Library Occupancy
+    // MARK: - Campus Library Occupancy & Opening
 
     func testCampusLibraryOccupancyAndOpening() {
         let libraries = CampusLibrary.defaultLibraries
-        XCTAssertGreaterThan(libraries.count, 3)
+        XCTAssertGreaterThan(libraries.count, 5)
 
-        let philo = libraries.first(where: { $0.name.contains("Philologicum") })
+        let philo = libraries.first(where: { $0.id == "phil" })
         XCTAssertNotNil(philo)
-        XCTAssertEqual(philo?.openWeekdayHour, 8)
-        XCTAssertEqual(philo?.closeWeekdayHour, 22)
+        XCTAssertEqual(philo?.totalSeats, 600)
+        XCTAssertEqual(philo?.occupancyFeedID, "phil")
 
-        // Capacity and free seats checks
-        if let p = philo {
-            XCTAssertGreaterThan(p.totalSeats, 500)
-            XCTAssertGreaterThanOrEqual(p.liveOccupancyPercentage, 0)
-            XCTAssertLessThanOrEqual(p.liveOccupancyPercentage, 100)
-            XCTAssertGreaterThanOrEqual(p.freeSeatsCount, 0)
-            XCTAssertLessThanOrEqual(p.freeSeatsCount, p.totalSeats)
-        }
+        // Test weekday opening hours (Monday = 2 in Gregorian)
+        let mondayHours = philo?.hours.hours(onWeekday: 2)
+        XCTAssertNotNil(mondayHours)
+        XCTAssertEqual(mondayHours?.open, 8 * 60)
+        XCTAssertEqual(mondayHours?.close, 22 * 60)
+
+        // Test Bavarian holiday calendar
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = TimeZone(identifier: "Europe/Berlin")!
+        let neujahr = cal.date(from: DateComponents(year: 2026, month: 1, day: 1, hour: 12))!
+        XCTAssertTrue(UBClosureCalendar.isClosedDay(neujahr))
+        XCTAssertFalse(philo?.isOpen(at: neujahr) ?? true)
+
+        // Test Platzfinder live widget HTML parsing
+        let sampleHTML = """
+        <script>
+        var data = google.visualization.arrayToDataTable([['Lesesaal', 'belegte Plätze', 'freie Plätze'],['FB Philologicum',68,32]]);
+        </script>
+        <div id="chart_text1">FB Philologicum<br>Plätze gesamt: 600</div>
+        """
+        let parsed = LibraryOccupancyService.parse(html: sampleHTML)
+        XCTAssertNotNil(parsed)
+        XCTAssertEqual(parsed?.occupiedPercent, 68)
+        XCTAssertEqual(parsed?.totalSeats, 600)
+        XCTAssertEqual(parsed?.level, .moderate)
+        XCTAssertEqual(parsed?.freeSeats, 192)
     }
 
     // MARK: - Academic Deadlines & Timeline

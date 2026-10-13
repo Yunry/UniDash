@@ -75,5 +75,6 @@ targets:
       base:
         CODE_SIGN_IDENTITY: "-"
         CODE_SIGN_STYLE: Manual
+        GENERATE_INFOPLIST_FILE: YES
 
 

@@ -53,6 +53,7 @@
 		9F3D423FB16890F9B2B63C6F /* AcademicTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A407DFC36F1A2B2328ABE86A /* AcademicTimelineView.swift */; };
 		A20667E1797EAFEBE9D902DD /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8207EF25D911F67CC6D47 /* ScheduleItem.swift */; };
 		A8F8448B09BF9E4FB43F6F61 /* TimetableImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307B8EA3D23DD4B6364E4770 /* TimetableImportView.swift */; };
+		ABE2B93DD712549B9CCB114F /* LibraryOccupancyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E8570F38BB1227B17CE77 /* LibraryOccupancyService.swift */; };
 		AD6ABA688251A5A2D20CA795 /* CalendarSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF64D10E6ED21882755385C /* CalendarSyncService.swift */; };
 		B2B50F9620E47A0AF0C19B7D /* CampusRoomDecoderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D836C48F377EE894A74451 /* CampusRoomDecoderView.swift */; };
 		B48BD20F1D4B50119673AD49 /* AppDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B20E684F81914E64FA983E4 /* AppDestination.swift */; };
@@ -72,12 +73,14 @@
 		D7C6E32F83D63FF72ABACC88 /* UniDashApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423134FC0459094CDBC3E29D /* UniDashApp.swift */; };
 		DA7A2929BF5BBA130782E035 /* CalendarPushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6E6050B708E9EFF3328838 /* CalendarPushView.swift */; };
 		E0CEDCA1C33319534A5D0A60 /* ScheduleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8207EF25D911F67CC6D47 /* ScheduleItem.swift */; };
+		E1C141D64E95C01F5F9E4DFC /* LibraryOccupancyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E8570F38BB1227B17CE77 /* LibraryOccupancyService.swift */; };
 		E6E61AB474966D23706FDD0D /* TimetableCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFC8806E957F110B98EBA8 /* TimetableCalendarView.swift */; };
 		EDD2D7898A92691C5152FFCC /* TimetableCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFC8806E957F110B98EBA8 /* TimetableCalendarView.swift */; };
 		F2268781868F9BCA8328AC8F /* MensaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1639DE983E8BE16D3961A3 /* MensaService.swift */; };
 		F29A498067E41D5C3AFB0600 /* ParseReviewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9553F6AB05EDF8A8491C77 /* ParseReviewSheet.swift */; };
 		F38B1B55804BEFEB772A3EEB /* ParseReviewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9553F6AB05EDF8A8491C77 /* ParseReviewSheet.swift */; };
 		F8FBBCDD9AEFDD48CF15C77D /* UniDashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711CBBDCD836049F374CFD7B /* UniDashTests.swift */; };
+		FB9B5A152D2C7E52B214A059 /* LibraryOccupancyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E8570F38BB1227B17CE77 /* LibraryOccupancyService.swift */; };
 		FDBC52D4BA24CB4864FFEB62 /* LibraryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37F24127CC5A62E6E885CED /* LibraryCard.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +110,7 @@
 		711CBBDCD836049F374CFD7B /* UniDashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniDashTests.swift; sourceTree = "<group>"; };
 		768389FD9A0FE0B37EDA839D /* GradesDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesDashboardView.swift; sourceTree = "<group>"; };
 		811C24F2D686A5BD94F0CF0F /* TimetableEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableEntry.swift; sourceTree = "<group>"; };
+		973E8570F38BB1227B17CE77 /* LibraryOccupancyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryOccupancyService.swift; sourceTree = "<group>"; };
 		977C1120ADD801FFDE182D17 /* AddCourseModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseModal.swift; sourceTree = "<group>"; };
 		A37F24127CC5A62E6E885CED /* LibraryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCard.swift; sourceTree = "<group>"; };
 		A407DFC36F1A2B2328ABE86A /* AcademicTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicTimelineView.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF64D10E6ED21882755385C /* CalendarSyncService.swift */,
+				973E8570F38BB1227B17CE77 /* LibraryOccupancyService.swift */,
 				5F1639DE983E8BE16D3961A3 /* MensaService.swift */,
 				50D141C8BBB7C9724BDD41A3 /* PDFScheduleParser.swift */,
 			);
@@ -397,6 +402,7 @@
 				111306C9D3466BED6EC5A746 /* GradesDashboardView.swift in Sources */,
 				CD725CB25FCA0FDFA2437848 /* LibraryCard.swift in Sources */,
 				7D0516EE363C693732A7DF3F /* LibraryInfo.swift in Sources */,
+				E1C141D64E95C01F5F9E4DFC /* LibraryOccupancyService.swift in Sources */,
 				C0FB6F5FB6E676CB8E8405CD /* MensaMeal.swift in Sources */,
 				1F14C860D5D266A7BC2043ED /* MensaMenuView.swift in Sources */,
 				6D7173703D992ED04EFD1BE7 /* MensaService.swift in Sources */,
@@ -422,6 +428,7 @@
 				C44CCFAAE40C2814B83C00F7 /* CampusRoomGuide.swift in Sources */,
 				7D097F551AD04E9FE17CBAC6 /* Course.swift in Sources */,
 				CFB98C6155AC87440106BF05 /* LibraryInfo.swift in Sources */,
+				ABE2B93DD712549B9CCB114F /* LibraryOccupancyService.swift in Sources */,
 				B5D23648ED6A7ECFC4065962 /* MensaMeal.swift in Sources */,
 				F2268781868F9BCA8328AC8F /* MensaService.swift in Sources */,
 				3850C7B57A424E4924F1D245 /* PDFScheduleParser.swift in Sources */,
@@ -451,6 +458,7 @@
 				977F0C48FB1F018C838DF6A5 /* GradesDashboardView.swift in Sources */,
 				FDBC52D4BA24CB4864FFEB62 /* LibraryCard.swift in Sources */,
 				65DD74AE002B9A8A8C7DD949 /* LibraryInfo.swift in Sources */,
+				FB9B5A152D2C7E52B214A059 /* LibraryOccupancyService.swift in Sources */,
 				8858E07E78374623D2AE2441 /* MensaMeal.swift in Sources */,
 				805C8A06EE997C103ECB7092 /* MensaMenuView.swift in Sources */,
 				5664A4D01885AD9E38AAEBB1 /* MensaService.swift in Sources */,
@@ -476,6 +484,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -706,6 +715,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

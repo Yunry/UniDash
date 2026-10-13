@@ -92,11 +92,13 @@ struct RoomBookingView: View {
     @Environment(\.openURL) private var openURL
     @State private var selectedTab: CampusHubTab = .libraries
 
-    // Libraries State
+    // Libraries & Live Occupancy State
+    @StateObject private var occupancyService = LibraryOccupancyService()
     @State private var libraries: [CampusLibrary] = CampusLibrary.defaultLibraries
     @State private var librarySearchText: String = ""
     @State private var selectedEquipmentFilter: LibraryEquipment? = nil
     @State private var onlyOpenLibraries: Bool = false
+    @State private var currentTime: Date = Date()
 
     // Rooms State
     @State private var rooms: [StudyRoom] = StudyRoom.defaultRooms
@@ -116,7 +118,7 @@ struct RoomBookingView: View {
                 lib.campusArea.localizedCaseInsensitiveContains(librarySearchText)
 
             let matchesEquipment = selectedEquipmentFilter == nil || lib.equipment.contains(selectedEquipmentFilter!)
-            let matchesOpen = !onlyOpenLibraries || lib.isOpenNow
+            let matchesOpen = !onlyOpenLibraries || lib.isOpen(at: currentTime)
 
             return matchesSearch && matchesEquipment && matchesOpen
         }
@@ -170,6 +172,24 @@ struct RoomBookingView: View {
             }
             .navigationTitle("Campus & Lernräume")
             .toolbar {
+                if selectedTab == .libraries {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button {
+                            Task {
+                                await refreshOccupancy()
+                            }
+                        } label: {
+                            if occupancyService.isLoading {
+                                ProgressView().controlSize(.small)
+                            } else {
+                                Label("Aktualisieren", systemImage: "arrow.clockwise")
+                            }
+                        }
+                        .disabled(occupancyService.isLoading)
+                        .help("Auslastung der Bibliotheken neu laden")
+                    }
+                }
+
                 if selectedTab == .rooms {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
@@ -180,6 +200,12 @@ struct RoomBookingView: View {
                     }
                 }
             }
+            .task {
+                await refreshOccupancy()
+            }
+            .onAppear {
+                loadRooms()
+            }
             .sheet(item: Binding<IdentifiableURL?>(
                 get: { activeURL.map { IdentifiableURL(url: $0, title: activeTitle) } },
                 set: { activeURL = $0?.url }
@@ -189,8 +215,29 @@ struct RoomBookingView: View {
             .sheet(isPresented: $showAddRoomSheet) {
                 AddStudyRoomModal { newRoom in
                     rooms.append(newRoom)
+                    saveRooms()
                 }
             }
+        }
+    }
+
+    private func refreshOccupancy() async {
+        currentTime = Date()
+        let feedIDs = libraries.compactMap { $0.occupancyFeedID }
+        await occupancyService.refresh(feedIDs: feedIDs)
+    }
+
+    private func loadRooms() {
+        if let data = UserDefaults.standard.data(forKey: "custom_study_rooms"),
+           let decoded = try? JSONDecoder().decode([StudyRoom].self, from: data),
+           !decoded.isEmpty {
+            self.rooms = decoded
+        }
+    }
+
+    private func saveRooms() {
+        if let data = try? JSONEncoder().encode(rooms) {
+            UserDefaults.standard.set(data, forKey: "custom_study_rooms")
         }
     }
 
@@ -269,10 +316,13 @@ struct RoomBookingView: View {
                 ForEach(filteredLibraries) { lib in
                     LibraryCard(
                         library: lib,
+                        occupancy: lib.occupancyFeedID.flatMap { occupancyService.occupancy[$0] },
+                        isLoadingOccupancy: occupancyService.isLoading,
+                        now: currentTime,
                         onBookInApp: {
-                            if let url = URL(string: lib.reservationURL) {
+                            if let reservation = lib.reservationURL, let url = URL(string: reservation) {
                                 activeURL = url
-                                activeTitle = "Platz buchen: \(lib.name)"
+                                activeTitle = "Platz reservieren: \(lib.name)"
                             }
                         },
                         onOpenInSafari: {
