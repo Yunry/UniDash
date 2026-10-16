@@ -500,6 +500,9 @@ struct InAppBrowserSheet: View {
                 }
             }
         }
+        #if os(macOS)
+        .frame(minWidth: 850, idealWidth: 980, minHeight: 600, idealHeight: 750)
+        #endif
     }
 }
 
@@ -513,23 +516,83 @@ struct AddStudyRoomModal: View {
     @State private var location: String = ""
     @State private var capacity: String = "1 Person"
     @State private var noiseLevel: String = "Stille Zone 🤫"
-    @State private var bookingURL: String = "https://anny.co"
+    @State private var bookingURL: String = "https://auth.anny.eu"
+
+    private let noiseOptions = [
+        "Stille Zone 🤫",
+        "Ruhiges Lernen 📚",
+        "Gruppenarbeit 👥",
+        "Telefonieren erlaubt 📞"
+    ]
+
+    private let capacityPresets = [
+        "1 Person",
+        "2–4 Personen",
+        "4–8 Personen",
+        "Großer Gruppenraum"
+    ]
 
     var body: some View {
         NavigationStack {
             Form {
                 Section(header: Text("Rauminformationen")) {
-                    TextField("Name des Lernbereichs", text: $name)
-                    TextField("Gebäude / Raum-ID", text: $location)
-                    TextField("Kapazität (z.B. 2–4 Personen)", text: $capacity)
-                    TextField("Lautstärke (z.B. Ruhig)", text: $noiseLevel)
-                    TextField("Buchungs-URL (Anny Link)", text: $bookingURL)
-                        .autocorrectionDisabled()
-                        #if os(iOS)
-                        .keyboardType(.URL)
-                        #endif
+                    LabeledContent("Name") {
+                        TextField("z.B. Lesesaal Philologicum", text: $name)
+                            .multilineTextAlignment(.trailing)
+                    }
+
+                    LabeledContent("Gebäude / Raum") {
+                        TextField("z.B. Ludwigstr. 25, 2. OG", text: $location)
+                            .multilineTextAlignment(.trailing)
+                    }
+
+                    VStack(alignment: .leading, spacing: 6) {
+                        LabeledContent("Kapazität") {
+                            TextField("z.B. 2–4 Personen", text: $capacity)
+                                .multilineTextAlignment(.trailing)
+                        }
+
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 6) {
+                                ForEach(capacityPresets, id: \.self) { preset in
+                                    Button(preset) {
+                                        capacity = preset
+                                    }
+                                    .font(.caption2)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(capacity == preset ? Color.blue : Color.secondary.opacity(0.12))
+                                    .foregroundStyle(capacity == preset ? Color.white : Color.primary)
+                                    .clipShape(Capsule())
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.vertical, 2)
+
+                    LabeledContent("Lautstärke") {
+                        Picker("", selection: $noiseLevel) {
+                            ForEach(noiseOptions, id: \.self) { opt in
+                                Text(opt).tag(opt)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                    }
+
+                    LabeledContent("Buchungs-Link") {
+                        TextField("https://auth.anny.eu", text: $bookingURL)
+                            .multilineTextAlignment(.trailing)
+                            .autocorrectionDisabled()
+                            #if os(iOS)
+                            .textInputAutocapitalization(.never)
+                            .keyboardType(.URL)
+                            #endif
+                    }
                 }
             }
+            .formStyle(.grouped)
             .navigationTitle("Lernraum hinzufügen")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
@@ -553,9 +616,13 @@ struct AddStudyRoomModal: View {
                         dismiss()
                     }
                     .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .fontWeight(.semibold)
                 }
             }
         }
+        #if os(macOS)
+        .frame(minWidth: 460, idealWidth: 500, minHeight: 460, idealHeight: 520)
+        #endif
     }
 }
 

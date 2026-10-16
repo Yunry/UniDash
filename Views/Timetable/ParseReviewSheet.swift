@@ -73,10 +73,15 @@ struct ParseReviewSheet: View {
                     header: HStack {
                         Text("Erkannte Kurse (\(entries.count))")
                         Spacer()
-                        Button(action: { showAddEntrySheet = true }) {
-                            Label("Kurs hinzufügen", systemImage: "plus.circle")
-                                .font(.footnote)
+                        Button {
+                            showAddEntrySheet = true
+                        } label: {
+                            Label("Kurs hinzufügen", systemImage: "plus")
+                                .font(.caption)
+                                .fontWeight(.medium)
                         }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
                     },
                     footer: Text("Tippen Sie auf einen Eintrag, um Details zu korrigieren. Abgewählte Kurse werden nicht in den Kalender übertragen.")
                 ) {
@@ -136,7 +141,6 @@ struct ParseReviewSheet: View {
                 AddTimetableEntryModal { newEntry in
                     entries.append(newEntry)
                 }
-                .frame(minWidth: 440, idealWidth: 480, minHeight: 500, idealHeight: 560)
             }
         }
         #if os(macOS)
@@ -183,60 +187,67 @@ struct ParseReviewSheet: View {
 
 struct TimetableEntryRow: View {
     @Binding var entry: TimetableEntry
-    @State private var isExpanded: Bool = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .top) {
-                Toggle("", isOn: $entry.isSelected)
+        HStack(alignment: .top, spacing: 12) {
+            Button {
+                entry.isSelected.toggle()
+            } label: {
+                Image(systemName: entry.isSelected ? "checkmark.circle.fill" : "circle")
+                    .font(.title3)
+                    .foregroundStyle(entry.isSelected ? Color.blue : Color.secondary)
+            }
+            .buttonStyle(.plain)
+            .padding(.top, 2)
+
+            VStack(alignment: .leading, spacing: 6) {
+                TextField("Kurstitel", text: $entry.courseTitle)
+                    .font(.headline)
+
+                HStack(spacing: 6) {
+                    Picker("Tag", selection: $entry.dayOfWeek) {
+                        ForEach(DayOfWeek.allCases) { day in
+                            Text(day.localizedName).tag(day)
+                        }
+                    }
                     .labelsHidden()
+                    .pickerStyle(.menu)
 
-                VStack(alignment: .leading, spacing: 4) {
-                    TextField("Kurstitel", text: $entry.courseTitle)
-                        .font(.headline)
-
-                    HStack(spacing: 6) {
-                        Picker("Tag", selection: $entry.dayOfWeek) {
-                            ForEach(DayOfWeek.allCases) { day in
-                                Text(day.localizedName).tag(day)
-                            }
-                        }
-                        .labelsHidden()
-                        .pickerStyle(.menu)
-
-                        Text("•")
-                            .foregroundStyle(.secondary)
-
-                        TextField("Start", text: $entry.startTime)
-                            .frame(width: 50)
-                            .textFieldStyle(.roundedBorder)
-
-                        Text("–")
-                            .foregroundStyle(.secondary)
-
-                        TextField("Ende", text: $entry.endTime)
-                            .frame(width: 50)
-                            .textFieldStyle(.roundedBorder)
-                    }
-                    .font(.subheadline)
-
-                    HStack(spacing: 8) {
-                        Label {
-                            TextField("Raum", text: $entry.room)
-                                .textFieldStyle(.plain)
-                        } icon: {
-                            Image(systemName: "mappin.and.ellipse")
-                                .foregroundStyle(.blue)
-                        }
-                        .font(.caption)
-
-                        TextField("Veranstaltungstyp", text: Binding(
-                            get: { entry.courseType ?? "Vorlesung" },
-                            set: { entry.courseType = $0 }
-                        ))
-                        .font(.caption)
+                    Text("•")
                         .foregroundStyle(.secondary)
+
+                    TextField("Start", text: $entry.startTime)
+                        .frame(width: 58)
+                        .multilineTextAlignment(.center)
+                        .textFieldStyle(.roundedBorder)
+
+                    Text("–")
+                        .foregroundStyle(.secondary)
+
+                    TextField("Ende", text: $entry.endTime)
+                        .frame(width: 58)
+                        .multilineTextAlignment(.center)
+                        .textFieldStyle(.roundedBorder)
+                }
+                .font(.subheadline)
+
+                HStack(spacing: 8) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundStyle(.blue)
+                            .font(.caption)
+                        TextField("Raum", text: $entry.room)
+                            .textFieldStyle(.roundedBorder)
+                            .font(.caption)
                     }
+
+                    TextField("Veranstaltungstyp", text: Binding(
+                        get: { entry.courseType ?? "Vorlesung" },
+                        set: { entry.courseType = $0 }
+                    ))
+                    .textFieldStyle(.roundedBorder)
+                    .font(.caption)
+                    .frame(maxWidth: 110)
                 }
             }
         }
@@ -258,25 +269,94 @@ struct AddTimetableEntryModal: View {
     @State private var courseType: String = "Vorlesung"
     @State private var instructor: String = ""
 
+    private let courseTypes = ["Vorlesung", "Übung", "Tutorium", "Seminar", "Praktikum", "Kolloquium"]
+    private let standardSlots = [
+        ("08:15", "09:45"),
+        ("10:15", "11:45"),
+        ("12:15", "13:45"),
+        ("14:15", "15:45"),
+        ("16:15", "17:45"),
+        ("18:15", "19:45")
+    ]
+
     var body: some View {
         NavigationStack {
             Form {
                 Section(header: Text("Kursdetails")) {
-                    TextField("Kursname (z.B. Höhere Mathematik)", text: $title)
-                    Picker("Wochentag", selection: $dayOfWeek) {
-                        ForEach(DayOfWeek.allCases) { day in
-                            Text(day.localizedName).tag(day)
+                    LabeledContent("Kurstitel") {
+                        TextField("z.B. Höhere Mathematik", text: $title)
+                            .multilineTextAlignment(.trailing)
+                    }
+
+                    LabeledContent("Wochentag") {
+                        Picker("", selection: $dayOfWeek) {
+                            ForEach(DayOfWeek.allCases) { day in
+                                Text(day.localizedName).tag(day)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                    }
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        LabeledContent("Zeitraum") {
+                            HStack(spacing: 6) {
+                                TextField("08:15", text: $startTime)
+                                    .frame(width: 58)
+                                    .multilineTextAlignment(.center)
+                                    .textFieldStyle(.roundedBorder)
+                                Text("–")
+                                    .foregroundStyle(.secondary)
+                                TextField("09:45", text: $endTime)
+                                    .frame(width: 58)
+                                    .multilineTextAlignment(.center)
+                                    .textFieldStyle(.roundedBorder)
+                            }
+                        }
+
+                        // Quick lecture slot chips
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 6) {
+                                ForEach(standardSlots, id: \.0) { slot in
+                                    Button("\(slot.0)–\(slot.1)") {
+                                        startTime = slot.0
+                                        endTime = slot.1
+                                    }
+                                    .font(.caption2)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(startTime == slot.0 && endTime == slot.1 ? Color.blue : Color.secondary.opacity(0.12))
+                                    .foregroundStyle(startTime == slot.0 && endTime == slot.1 ? Color.white : Color.primary)
+                                    .clipShape(Capsule())
+                                    .buttonStyle(.plain)
+                                }
+                            }
                         }
                     }
-                    HStack {
-                        TextField("Startzeit (HH:mm)", text: $startTime)
-                        TextField("Endzeit (HH:mm)", text: $endTime)
+                    .padding(.vertical, 2)
+
+                    LabeledContent("Raum / Hörsaal") {
+                        TextField("z.B. Audimax", text: $room)
+                            .multilineTextAlignment(.trailing)
                     }
-                    TextField("Raum / Hörsaal", text: $room)
-                    TextField("Typ (Vorlesung, Übung, etc.)", text: $courseType)
-                    TextField("Dozent (optional)", text: $instructor)
+
+                    LabeledContent("Veranstaltungstyp") {
+                        Picker("", selection: $courseType) {
+                            ForEach(courseTypes, id: \.self) { t in
+                                Text(t).tag(t)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                    }
+
+                    LabeledContent("Dozent (optional)") {
+                        TextField("z.B. Prof. Dr. Müller", text: $instructor)
+                            .multilineTextAlignment(.trailing)
+                    }
                 }
             }
+            .formStyle(.grouped)
             .navigationTitle("Kurs hinzufügen")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
@@ -299,8 +379,13 @@ struct AddTimetableEntryModal: View {
                         onAdd(newEntry)
                         dismiss()
                     }
+                    .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .fontWeight(.semibold)
                 }
             }
         }
+        #if os(macOS)
+        .frame(minWidth: 460, idealWidth: 500, minHeight: 480, idealHeight: 540)
+        #endif
     }
 }

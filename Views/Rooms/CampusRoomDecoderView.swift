@@ -258,7 +258,7 @@ struct CampusRoomDecoderView: View {
                         Button {
                             openURL(activeMapURL)
                         } label: {
-                            Image(systemName: "safari")
+                            Label("In Safari", systemImage: "safari")
                         }
                     }
                 }

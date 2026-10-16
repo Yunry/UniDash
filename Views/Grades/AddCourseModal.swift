@@ -43,21 +43,30 @@ struct AddCourseModal: View {
             Form {
                 // MARK: - Course Details
                 Section(header: Text("Moduldetails")) {
-                    TextField("Modulname (z.B. Softwaretechnik)", text: $name)
-
-                    Picker("Semester", selection: $semester) {
-                        ForEach(semesterPresets, id: \.self) { sem in
-                            Text(sem).tag(sem)
-                        }
+                    LabeledContent("Modulname") {
+                        TextField("z.B. Softwaretechnik", text: $name)
+                            .multilineTextAlignment(.trailing)
                     }
 
-                    VStack(alignment: .leading, spacing: 8) {
+                    LabeledContent("Semester") {
+                        Picker("", selection: $semester) {
+                            ForEach(semesterPresets, id: \.self) { sem in
+                                Text(sem).tag(sem)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                    }
+
+                    VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Text("ECTS-Leistungspunkte")
+                            Text("ECTS-Punkte")
                             Spacer()
                             Text("\(String(format: "%.1f", ects)) ECTS")
                                 .fontWeight(.semibold)
                                 .foregroundStyle(.blue)
+                            Stepper("", value: $ects, in: 0.5...30, step: 0.5)
+                                .labelsHidden()
                         }
 
                         // Quick ECTS selector chips
@@ -67,12 +76,12 @@ struct AddCourseModal: View {
                                     Button {
                                         ects = value
                                     } label: {
-                                        Text("\(Int(value))")
+                                        Text("\(Int(value)) ECTS")
                                             .font(.caption)
                                             .fontWeight(ects == value ? .bold : .regular)
                                             .padding(.horizontal, 10)
-                                            .padding(.vertical, 4)
-                                            .background(ects == value ? Color.blue : Color.secondary.opacity(0.15))
+                                            .padding(.vertical, 5)
+                                            .background(ects == value ? Color.blue : Color.secondary.opacity(0.12))
                                             .foregroundStyle(ects == value ? .white : .primary)
                                             .clipShape(Capsule())
                                     }
@@ -80,10 +89,8 @@ struct AddCourseModal: View {
                                 }
                             }
                         }
-
-                        Stepper("", value: $ects, in: 1...30, step: 0.5)
-                            .labelsHidden()
                     }
+                    .padding(.vertical, 2)
                 }
 
                 // MARK: - Completion & Grade
@@ -94,25 +101,36 @@ struct AddCourseModal: View {
                         Toggle("Benotetes Modul", isOn: $isGraded)
 
                         if isGraded {
-                            VStack(alignment: .leading, spacing: 8) {
+                            VStack(alignment: .leading, spacing: 10) {
                                 HStack {
                                     Text("Note:")
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
                                     Spacer()
                                     Text(String(format: "%.1f", grade))
                                         .font(.title3)
                                         .fontWeight(.bold)
                                         .foregroundStyle(grade <= 4.0 ? .green : .red)
-                                    Text("(\(gradeDescription(for: grade)))")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
+                                    Text("• \(gradeDescription(for: grade))")
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                        .foregroundStyle(grade <= 4.0 ? .green : .red)
                                 }
 
-                                Picker("Deutsche Note", selection: $grade) {
-                                    ForEach(standardGrades, id: \.self) { g in
-                                        Text(String(format: "%.1f", g)).tag(g)
+                                // Responsive Grade Chips Grid
+                                VStack(spacing: 8) {
+                                    HStack(spacing: 6) {
+                                        ForEach([1.0, 1.3, 1.7, 2.0, 2.3, 2.7], id: \.self) { g in
+                                            gradeButton(for: g)
+                                        }
+                                    }
+                                    HStack(spacing: 6) {
+                                        ForEach([3.0, 3.3, 3.7, 4.0, 5.0], id: \.self) { g in
+                                            gradeButton(for: g)
+                                        }
+                                        Spacer()
                                     }
                                 }
-                                .pickerStyle(.segmented)
                             }
                             .padding(.vertical, 4)
                         } else {
@@ -128,6 +146,7 @@ struct AddCourseModal: View {
                     }
                 }
             }
+            .formStyle(.grouped)
             .navigationTitle(courseToEdit == nil ? "Kurs hinzufügen" : "Kurs bearbeiten")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
@@ -158,6 +177,25 @@ struct AddCourseModal: View {
                 }
             }
         }
+        #if os(macOS)
+        .frame(minWidth: 480, idealWidth: 520, minHeight: 480, idealHeight: 560)
+        #endif
+    }
+
+    @ViewBuilder
+    private func gradeButton(for g: Double) -> some View {
+        Button {
+            grade = g
+        } label: {
+            Text(String(format: "%.1f", g))
+                .font(.subheadline)
+                .fontWeight(abs(grade - g) < 0.05 ? .bold : .medium)
+                .frame(maxWidth: .infinity, minHeight: 30)
+                .background(abs(grade - g) < 0.05 ? (g <= 4.0 ? Color.green : Color.red) : Color.secondary.opacity(0.12))
+                .foregroundStyle(abs(grade - g) < 0.05 ? Color.white : Color.primary)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
+        .buttonStyle(.plain)
     }
 
     private func saveCourse() {

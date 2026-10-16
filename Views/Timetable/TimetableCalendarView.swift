@@ -594,46 +594,110 @@ struct AddScheduleItemModal: View {
     private let colors = ["#3B82F6", "#10B981", "#6366F1", "#EC4899", "#F59E0B", "#8B5CF6", "#14B8A6"]
     private let courseTypes = ["Vorlesung", "Übung", "Tutorium", "Seminar", "Praktikum", "Kolloquium"]
 
+    private let standardSlots = [
+        ("08:15", "09:45"),
+        ("10:15", "11:45"),
+        ("12:15", "13:45"),
+        ("14:15", "15:45"),
+        ("16:15", "17:45"),
+        ("18:15", "19:45")
+    ]
+
     var body: some View {
         NavigationStack {
             Form {
                 Section(header: Text("Lehrveranstaltung")) {
-                    TextField("Kurstitel (z.B. Höhere Mathematik I)", text: $courseTitle)
-
-                    Picker("Wochentag", selection: $dayOfWeek) {
-                        ForEach(DayOfWeek.allCases) { day in
-                            Text(day.localizedName).tag(day)
-                        }
+                    LabeledContent("Kurstitel") {
+                        TextField("z.B. Höhere Mathematik I", text: $courseTitle)
+                            .multilineTextAlignment(.trailing)
                     }
 
-                    HStack {
-                        TextField("Startzeit (HH:mm)", text: $startTime)
-                        TextField("Endzeit (HH:mm)", text: $endTime)
+                    LabeledContent("Wochentag") {
+                        Picker("", selection: $dayOfWeek) {
+                            ForEach(DayOfWeek.allCases) { day in
+                                Text(day.localizedName).tag(day)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
                     }
 
-                    TextField("Raum / Hörsaal (z.B. Audimax, 50.34)", text: $room)
-                    TextField("Dozent / Professor", text: $instructor)
-
-                    Picker("Typ", selection: $courseType) {
-                        ForEach(courseTypes, id: \.self) { t in
-                            Text(t).tag(t)
+                    VStack(alignment: .leading, spacing: 8) {
+                        LabeledContent("Zeitraum") {
+                            HStack(spacing: 6) {
+                                TextField("08:15", text: $startTime)
+                                    .frame(width: 58)
+                                    .multilineTextAlignment(.center)
+                                    .textFieldStyle(.roundedBorder)
+                                Text("–")
+                                    .foregroundStyle(.secondary)
+                                TextField("09:45", text: $endTime)
+                                    .frame(width: 58)
+                                    .multilineTextAlignment(.center)
+                                    .textFieldStyle(.roundedBorder)
+                            }
                         }
+
+                        // Quick lecture slot chips
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 6) {
+                                ForEach(standardSlots, id: \.0) { slot in
+                                    Button("\(slot.0)–\(slot.1)") {
+                                        startTime = slot.0
+                                        endTime = slot.1
+                                    }
+                                    .font(.caption2)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(startTime == slot.0 && endTime == slot.1 ? Color.blue : Color.secondary.opacity(0.12))
+                                    .foregroundStyle(startTime == slot.0 && endTime == slot.1 ? Color.white : Color.primary)
+                                    .clipShape(Capsule())
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.vertical, 2)
+
+                    LabeledContent("Raum / Hörsaal") {
+                        TextField("z.B. Audimax, A 140", text: $room)
+                            .multilineTextAlignment(.trailing)
+                    }
+
+                    LabeledContent("Dozent (optional)") {
+                        TextField("z.B. Prof. Dr. Müller", text: $instructor)
+                            .multilineTextAlignment(.trailing)
+                    }
+
+                    LabeledContent("Veranstaltungstyp") {
+                        Picker("", selection: $courseType) {
+                            ForEach(courseTypes, id: \.self) { t in
+                                Text(t).tag(t)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
                     }
                 }
 
                 Section(header: Text("Farbe")) {
-                    HStack(spacing: 12) {
+                    HStack(spacing: 14) {
                         ForEach(colors, id: \.self) { hex in
-                            Circle()
-                                .fill(Color(hex: hex))
-                                .frame(width: 32, height: 32)
-                                .overlay(
+                            Button {
+                                colorHex = hex
+                            } label: {
+                                ZStack {
                                     Circle()
-                                        .stroke(Color.primary, lineWidth: colorHex == hex ? 3 : 0)
-                                )
-                                .onTapGesture {
-                                    colorHex = hex
+                                        .fill(Color(hex: hex))
+                                        .frame(width: 32, height: 32)
+                                    if colorHex.lowercased() == hex.lowercased() {
+                                        Image(systemName: "checkmark")
+                                            .font(.system(size: 13, weight: .bold))
+                                            .foregroundStyle(.white)
+                                    }
                                 }
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                     .padding(.vertical, 4)
@@ -655,6 +719,7 @@ struct AddScheduleItemModal: View {
                     }
                 }
             }
+            .formStyle(.grouped)
             .navigationTitle(itemToEdit == nil ? "Kurs eintragen" : "Kurs bearbeiten")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
@@ -708,5 +773,8 @@ struct AddScheduleItemModal: View {
                 }
             }
         }
+        #if os(macOS)
+        .frame(minWidth: 460, idealWidth: 500, minHeight: 520, idealHeight: 580)
+        #endif
     }
 }

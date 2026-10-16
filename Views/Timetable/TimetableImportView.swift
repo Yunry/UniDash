@@ -623,23 +623,25 @@ private struct TimetableEntryCard: View {
             // Content
             VStack(alignment: .leading, spacing: 6) {
                 // Row 1: Day, Time & Delete
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Picker("Tag", selection: $entry.dayOfWeek) {
                         ForEach(DayOfWeek.allCases) { day in
                             Text(day.localizedName).tag(day)
                         }
                     }
                     .pickerStyle(.menu)
-                    .frame(maxWidth: 110, alignment: .leading)
+                    .frame(maxWidth: 130, alignment: .leading)
 
-                    HStack(spacing: 2) {
+                    HStack(spacing: 4) {
                         TextField("Start", text: $entry.startTime)
-                            .frame(width: 48)
+                            .frame(width: 58)
+                            .multilineTextAlignment(.center)
                             .textFieldStyle(.roundedBorder)
                         Text("–")
                             .foregroundStyle(.secondary)
                         TextField("Ende", text: $entry.endTime)
-                            .frame(width: 48)
+                            .frame(width: 58)
+                            .multilineTextAlignment(.center)
                             .textFieldStyle(.roundedBorder)
                     }
 
@@ -658,7 +660,7 @@ private struct TimetableEntryCard: View {
                 TextField("Kurstitel", text: $entry.courseTitle)
                     .font(.headline)
                     .textFieldStyle(.plain)
-                    .padding(4)
+                    .padding(6)
                     .background(Color.secondary.opacity(0.08))
                     .clipShape(RoundedRectangle(cornerRadius: 6))
 

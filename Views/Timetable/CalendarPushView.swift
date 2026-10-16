@@ -32,28 +32,28 @@ struct CalendarPushView: View {
             Form {
                 // MARK: - Summary Section
                 Section(header: Text("Übersicht")) {
-                    HStack {
-                        Label("Ausgewählte Kurse", systemImage: "books.vertical.fill")
-                        Spacer()
+                    LabeledContent {
                         Text("\(activeEntries.count) von \(entries.count)")
                             .font(.headline)
                             .foregroundStyle(.blue)
+                    } label: {
+                        Label("Ausgewählte Kurse", systemImage: "books.vertical.fill")
                     }
 
-                    HStack {
-                        Label("Laufzeit", systemImage: "calendar")
-                        Spacer()
+                    LabeledContent {
                         Text("\(semesterStartDate.formatted(date: .abbreviated, time: .omitted)) – \(semesterEndDate.formatted(date: .abbreviated, time: .omitted))")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
+                    } label: {
+                        Label("Laufzeit", systemImage: "calendar")
                     }
 
-                    HStack {
-                        Label("Wiederholung", systemImage: "repeat")
-                        Spacer()
+                    LabeledContent {
                         Text("Wöchentlich")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
+                    } label: {
+                        Label("Wiederholung", systemImage: "repeat")
                     }
                 }
 
@@ -62,15 +62,22 @@ struct CalendarPushView: View {
                     header: Text("Zielkalender"),
                     footer: Text("UniDash legt standardmäßig einen separaten Kalender 'Uni Schedule' an, um Ihre persönlichen Kalender sauber zu halten.")
                 ) {
-                    TextField("Kalendername", text: $selectedCalendarName)
-                        .autocorrectionDisabled()
+                    LabeledContent("Kalendername") {
+                        TextField("z.B. Uni Schedule", text: $selectedCalendarName)
+                            .multilineTextAlignment(.trailing)
+                            .autocorrectionDisabled()
+                    }
 
                     if !syncService.availableCalendars.isEmpty {
-                        Picker("Oder bestehenden wählen", selection: $selectedCalendarName) {
-                            Text("Uni Schedule (Empfohlen)").tag(CalendarSyncService.defaultCalendarName)
-                            ForEach(syncService.availableCalendars, id: \.calendarIdentifier) { cal in
-                                Text(cal.title).tag(cal.title)
+                        LabeledContent("Bestehender Kalender") {
+                            Picker("", selection: $selectedCalendarName) {
+                                Text("Uni Schedule (Empfohlen)").tag(CalendarSyncService.defaultCalendarName)
+                                ForEach(syncService.availableCalendars, id: \.calendarIdentifier) { cal in
+                                    Text(cal.title).tag(cal.title)
+                                }
                             }
+                            .labelsHidden()
+                            .pickerStyle(.menu)
                         }
                     }
 
@@ -142,12 +149,11 @@ struct CalendarPushView: View {
                 // MARK: - Action Button
                 Section {
                     Button(action: startSync) {
-                        HStack {
+                        HStack(spacing: 8) {
                             Spacer()
                             if syncService.isSyncing {
                                 ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle())
-                                    .padding(.trailing, 8)
+                                    .controlSize(.small)
                                 Text("Synchronisiere...")
                             } else {
                                 Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
@@ -156,10 +162,15 @@ struct CalendarPushView: View {
                             }
                             Spacer()
                         }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 4)
                     }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
                     .disabled(syncService.isSyncing || activeEntries.isEmpty)
                 }
             }
+            .formStyle(.grouped)
             .navigationTitle("Kalender-Export")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)

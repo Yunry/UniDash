@@ -518,7 +518,10 @@ struct RateMealSheet: View {
                             Image(systemName: star <= selectedStars ? "star.fill" : "star")
                                 .font(.system(size: 36))
                                 .foregroundStyle(star <= selectedStars ? .yellow : .secondary.opacity(0.3))
+                                .scaleEffect(star <= selectedStars ? 1.08 : 1.0)
+                                .animation(.spring(response: 0.25, dampingFraction: 0.7), value: selectedStars)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.vertical, 8)
@@ -558,7 +561,11 @@ struct RateMealSheet: View {
                 }
             }
         }
+        #if os(iOS)
         .presentationDetents([.fraction(0.45)])
+        #else
+        .frame(minWidth: 400, idealWidth: 440, minHeight: 340, idealHeight: 380)
+        #endif
     }
 
     private func starDescription(for stars: Int) -> String {
@@ -633,6 +640,8 @@ struct IMensaDirectoryModal: View {
                 }
                 .background(.bar)
 
+                Divider()
+
                 List {
                     // Favorites Section
                     let favorites = filteredCanteens.filter { mensaService.isFavorite(canteenId: $0.id) }
@@ -668,46 +677,52 @@ struct IMensaDirectoryModal: View {
                 }
             }
         }
+        #if os(macOS)
+        .frame(minWidth: 540, idealWidth: 620, minHeight: 520, idealHeight: 650)
+        #endif
     }
 
     @ViewBuilder
     private func canteenRow(_ canteen: CanteenInfo) -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 3) {
-                HStack {
-                    Text(canteen.name)
-                        .font(.body)
-                        .fontWeight(.medium)
-                    if selectedCanteenId == canteen.id {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(.blue)
-                            .font(.caption)
-                    }
-                }
-                Text("\(canteen.city) • \(canteen.address ?? "Campus")")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-
-            Button {
-                mensaService.toggleFavorite(canteenId: canteen.id)
-            } label: {
-                Image(systemName: mensaService.isFavorite(canteenId: canteen.id) ? "star.fill" : "star")
-                    .foregroundStyle(.yellow)
-                    .font(.body)
-            }
-            .buttonStyle(.plain)
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
+        Button {
             selectedCanteenId = canteen.id
             selectedCanteenName = canteen.name
             selectedCanteenCity = canteen.city
             onSelected()
             dismiss()
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack {
+                        Text(canteen.name)
+                            .font(.body)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.primary)
+                        if selectedCanteenId == canteen.id {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(.blue)
+                                .font(.caption)
+                        }
+                    }
+                    Text("\(canteen.city) • \(canteen.address ?? "Campus")")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Button {
+                    mensaService.toggleFavorite(canteenId: canteen.id)
+                } label: {
+                    Image(systemName: mensaService.isFavorite(canteenId: canteen.id) ? "star.fill" : "star")
+                        .foregroundStyle(.yellow)
+                        .font(.body)
+                }
+                .buttonStyle(.plain)
+            }
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
     }
 }
 
